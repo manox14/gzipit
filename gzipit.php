@@ -2,7 +2,7 @@
 
 /**
  * 
- * Gzip it! v 1.0
+ * Gzip it! (1.0-beta1)
  *
  * Single file solution for CSS and JavaScript combination, 
  * minimization, gzipping and caching.
@@ -41,7 +41,7 @@
  * @package gzipit
  * @author Artem Volk <artvolk@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT License
- * @version $Id$
+ * @version 1.0-beta1 (svn: $Id$)
  * @link http://code.google.com/p/gzipit/     
  */		
 
