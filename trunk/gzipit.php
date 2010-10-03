@@ -2,7 +2,7 @@
 
 /**
  * 
- * Gzip it! (1.0-beta1)
+ * GzipIt (1.0-beta1)
  *
  * Single file solution for CSS and JavaScript combination, 
  * minimization, gzipping and caching.
@@ -41,7 +41,7 @@
  * @package gzipit
  * @author Artem Volk <artvolk@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT License
- * @version 1.0-beta1 (svn: $Id$)
+ * @version 1.0-beta1 ($Id$)
  * @link http://code.google.com/p/gzipit/     
  */		
 
@@ -51,30 +51,77 @@
  * ***************************************************************************************************************** 
  */	
 
+// Use gzip compression
 define('CP_COMPRESSION', true);
+
+// IE6 is buggy with gzip, you can turn gzip for this browser completely using this parameter
 define('CP_COMPRESSION_FOR_IE6', true);
 
+// Compresion level (from 0 to 9)
 define('CP_GZIP_LEVEL', 9);
 
+// Cache files on disk (with minimizing enabled this should be enabled)
 define('CP_DISK_CACHE',	true);
 
+// Minimize CSS files
 define('CP_CSSMIN', true);
+
+// Minimize JavaScript files
 define('CP_JSMIN', true);
- 	
+
+// Include filename into combined output (usefull for debug)
 define('CP_INCLUDE_FILENAME', true); 	
 
+// Directory where output files will be cached (can be placed outside of document root)
 define('CP_DIR_CACHE', dirname(__FILE__) . '/tmp');
+
+// Directory where original CSS files are stored (sub directories are accessible too)
 define('CP_DIR_CSS', dirname(__FILE__) . '/css');			
+
+// Directory where original CSS files are stored (sub directories are accessible too)
 define('CP_DIR_JS', dirname(__FILE__) . '/js');				
 
+// Send 'ETag' header (calculated automatically)
 define('CP_HEADER_ETAG', true);
+
+// Send 'Last-Modified' header (calculated automatically)
 define('CP_HEADER_LAST_MODIFIED', true);
+
+// Send 'Cache-Control' header
 define('CP_HEADER_CACHE_CONTROL', true);
+
+// Value for the 'Cache-Control' header
 define('CP_HEADER_CACHE_CONTROL_VALUE', 'max-age=315360000');
+
+// Send 'Expires' header
 define('CP_HEADER_EXPIRES', true);
+
+// Value for the 'Expires' header
 define('CP_HEADER_EXPIRES_VALUE', 'Thu, 31 Dec 2037 23:55:55 GMT');
 
+// NOTE: Specify name of the asset file OR assets array, but not the two at the same time
 define('CP_ASSETS_FILE', 'assets.php');
+/*
+	Example of $CP_ASSETS
+
+	$CP_ASSETS = array(
+		'css-default' => array(
+			'type' => 'css',
+			'files' => array(
+				'file1.css',
+				...
+			)
+		),
+		'js-default' => array(
+			'type' => 'javascript',
+			'files' => array(
+				'file1.js',
+				...
+			)
+		),
+	);
+	
+*/
 $CP_ASSETS = array(
 );
 
