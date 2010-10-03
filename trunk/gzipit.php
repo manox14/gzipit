@@ -69,7 +69,7 @@ define('CP_CSSMIN', true);
 // Minimize JavaScript files
 define('CP_JSMIN', true);
 
-// Include filename into combined output (usefull for debug)
+// Include filename into combined output (useful for debug)
 define('CP_INCLUDE_FILENAME', true); 	
 
 // Directory where output files will be cached (can be placed outside of document root)
