@@ -109,6 +109,7 @@ define('CP_ASSETS_FILE', 'assets.php');
 			'type' => 'css',
 			'files' => array(
 				'file1.css',
+				'file2.css',
 				...
 			)
 		),
@@ -116,6 +117,7 @@ define('CP_ASSETS_FILE', 'assets.php');
 			'type' => 'javascript',
 			'files' => array(
 				'file1.js',
+				'file2.js',
 				...
 			)
 		),
