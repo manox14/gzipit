@@ -4,7 +4,7 @@
   
 
 =Features=
-	* _*Single PHP file*_, easy installation, [http://en.wikipedia.org/wiki/List_of_PHP_accelerators PHP accelerators friendly]
+	* _*Single PHP file*_, easy installation, [http://en.wikipedia.org/wiki/List_of_PHP_accelerators PHP accelerators] friendly
 	* *No changes* in the existing development and deployment process, no scripts to run on any change in CSS or !JavaScript file, !GzipIt tries to be as transparent for developer as possible
 	* Multiple files are *combined in one* thus minimizing number of needed connections
 	* CSS and !JavaScript *code is minimized* by removing comments, spaces and line feeds
@@ -72,30 +72,30 @@ Asset is a 'preset' of two parameters (`type` and `files`) and can be specified 
 If you specify this parameter (default is empty string):
 	
 {{{
-	define('CP_ASSETS_FILE', 'assets.php');
+define('CP_ASSETS_FILE', 'assets.php');
 }}}
 the specified file will be included and variable called `$CP_ASSETS` will be used, otherwise you can specify this variable in `gzipit.php`.
 For both cases syntax is the same:
 
 {{{
-	$CP_ASSETS = array(
-		'css-default' => array(
-			'type' => 'css',
-			'files' => array(
-				'file1.css',
-				'file2.css',
-				...
-			)
-		),
-		'js-default' => array(
-			'type' => 'javascript',
-			'files' => array(
-				'file1.js',
-				'file2.js',
-				...
-			)
-		),
-	);
+$CP_ASSETS = array(
+	'css-default' => array(
+		'type' => 'css',
+		'files' => array(
+			'file1.css',
+			'file2.css',
+			...
+		)
+	),
+	'js-default' => array(
+		'type' => 'javascript',
+		'files' => array(
+			'file1.js',
+			'file2.js',
+			...
+		)
+	),
+);
 }}}
 
 Have you noticed how similar assets are to `type` and `files` parameters?
@@ -153,6 +153,7 @@ Here are some things I want to do before release:
 	* Test code with PHP 5.3
 	* Add support for eAccelerator or APC cache to store processed files there
 	* Better prefix and names for configuration parameters
+	* Check if phar is really an option
 	
 =Limitations=	
 	* For even more efficient serving CSS and !JavaScript you should consider performing combining, minimizing and gzipping beforehand, so files will be served directly by web server without any need for PHP. If you have really high traffic site you should already know and use this :).
