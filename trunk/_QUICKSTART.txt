@@ -15,7 +15,7 @@
 	* Friendly error messages for the quick debug
 	
 =Requirements=
-	* PHP 5.2.x
+	* PHP 5.x
 	* `zlib` extension (usually installed with PHP)
 	* `mod_rewrite` is recommended but not required
 
@@ -148,11 +148,13 @@ With nice and clean URLs:
 <script type="text/javascript" src="/asset-js-default.v1.js"></script>
 }}}
 
+=Changelog=
+	* 2011-03-__ -- first stable version, PHP 5.3 support
+	* 2010-10-03 -- initial release v1.0-beta1
+
 =!ToDo=
-Here are some things I want to do before release:
-	* Test code with PHP 5.3
-	* Add support for eAccelerator or APC cache to store processed files there
-	* Better prefix and names for configuration parameters
+	* Add support for eAccelerator\APC\memcached to store processed files in their cache
+	* Better prefix and names for configuration parameters (any ideas?)
 	* Check if phar is really an option
 	
 =Limitations=	
