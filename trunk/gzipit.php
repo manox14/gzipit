@@ -2,7 +2,7 @@
 
 /**
  *
- * GzipIt (1.0-beta1)
+ * GzipIt 1.0
  *
  * Single file solution for CSS and JavaScript combination,
  * minimization, gzipping and caching.
