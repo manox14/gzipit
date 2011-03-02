@@ -1,18 +1,18 @@
 <?php
 
 /**
- * 
+ *
  * GzipIt (1.0-beta1)
  *
- * Single file solution for CSS and JavaScript combination, 
+ * Single file solution for CSS and JavaScript combination,
  * minimization, gzipping and caching.
- * 
+ *
  * For documentation, requirements, updates and support please visit:
- * http://code.google.com/p/gzipit/   
- *  
+ * http://code.google.com/p/gzipit/
+ *
  * Inspired by CSS and Javascript Combinator by Niels Leenheer
  * (http://rakaz.nl/code/combine)
- * 
+ *
  * See copyright and licences below for bundled components.
  *
  * --
@@ -37,19 +37,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * --
- * 
+ *
  * @package gzipit
  * @author Artem Volk <artvolk@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT License
  * @version 1.0 ($Id$)
- * @link http://code.google.com/p/gzipit/     
- */		
+ * @link http://code.google.com/p/gzipit/
+ */
 
 
 /**
  * Configuration section
- * ***************************************************************************************************************** 
- */	
+ * *****************************************************************************************************************
+ */
 
 // Use gzip compression
 define('CP_COMPRESSION', false);
@@ -70,16 +70,16 @@ define('CP_CSSMIN', true);
 define('CP_JSMIN', true);
 
 // Include filename into combined output (useful for debug)
-define('CP_INCLUDE_FILENAME', true); 	
+define('CP_INCLUDE_FILENAME', true);
 
 // Directory where output files will be cached (can be placed outside of document root)
 define('CP_DIR_CACHE', dirname(__FILE__) . '/tmp');
 
 // Directory where original CSS files are stored (sub directories are accessible too)
-define('CP_DIR_CSS', dirname(__FILE__) . '/css');			
+define('CP_DIR_CSS', dirname(__FILE__) . '/css');
 
 // Directory where original CSS files are stored (sub directories are accessible too)
-define('CP_DIR_JS', dirname(__FILE__) . '/js');				
+define('CP_DIR_JS', dirname(__FILE__) . '/js');
 
 // Send 'ETag' header (calculated automatically)
 define('CP_HEADER_ETAG', true);
@@ -122,16 +122,16 @@ define('CP_ASSETS_FILE', 'assets.php');
 			)
 		),
 	);
-	
+
 */
 $CP_ASSETS = array(
 );
 
-   	
+
 /**
- * Just code below   
+ * Just code below
  * No user-serviceable parts inside :)
- * ***************************************************************************************************************** 
+ * *****************************************************************************************************************
  */
 // Other constants and parameters
 define('CP_FILELIST_DELIMITER', ',');
@@ -146,17 +146,17 @@ $CP_ENCODING_TYPES = array(
 define('CP_TYPE_CSS', 'css');
 define('CP_TYPE_JS', 'javascript');
 $CP_TYPES = array(
-	CP_TYPE_CSS, 
+	CP_TYPE_CSS,
 	CP_TYPE_JS
 );
 $CP_CONTENT_TYPES = array(
-	CP_TYPE_CSS => 'text/css', 
+	CP_TYPE_CSS => 'text/css',
 	CP_TYPE_JS => 'text/javascript'
 );
 $CP_EXTENSIONS = array(
 	CP_TYPE_CSS	=> 'css',
 	CP_TYPE_JS	=> 'js'
-); 
+);
 $CP_PATHES = array(
 	CP_TYPE_CSS	=> CP_DIR_CSS,
 	CP_TYPE_JS	=> CP_DIR_JS
@@ -187,7 +187,7 @@ if ($asset != NULL)
 	else
 	{
 		give_404('Incorrect asset name');
-		exit;	
+		exit;
 	}
 }
 
@@ -197,7 +197,7 @@ if ($files != NULL && $type != NULL)
 	if (in_array($type, $CP_TYPES))
 	{
 		if ($asset == NULL)
-		{		
+		{
 			$elements = explode(CP_FILELIST_DELIMITER, $files);
 		}
 		else
@@ -214,12 +214,12 @@ if ($files != NULL && $type != NULL)
 else
 {
 	if ($asset == NULL)
-	{	
+	{
 		give_404('Incorrect files and type parameters');
 	}
 	else
 	{
-		give_404('Incorrect asset definition');	
+		give_404('Incorrect asset definition');
 	}
 	exit;
 }
@@ -227,12 +227,12 @@ else
 
 /**
  * Determine supported compression
- *  
+ *
  */
 if (CP_COMPRESSION)
 {
 	$temp = getAcceptedEncoding();
-	
+
 	if ($temp[0] == CP_ENCODING_GZIP)
 	{
 		$encoding = CP_ENCODING_GZIP;
@@ -267,22 +267,22 @@ foreach ($elements as $element)
 		substr($path, 0, strlen($base_path)) != $base_path ||
 		!file_exists($path))
 	{
-		$message = sprintf('File "%s" not found', htmlspecialchars($element)); 
+		$message = sprintf('File "%s" not found', htmlspecialchars($element));
 		give_404($message);
-		exit;	
+		exit;
 	}
-	
+
 	$last_modified = max($last_modified, filemtime($path));
 }
 
 
 /**
  * Construct and send ETag if enabled
- */   
+ */
 $etag = sprintf('%s-%s', $last_modified, md5(implode(CP_FILELIST_DELIMITER, $elements) . $type . (string)(CP_CSSMIN || CP_JSMIN) . $encoding_header));
 if (CP_HEADER_ETAG)
 {
-    header ('Etag: "' . $etag . '"');
+	header ('Etag: "' . $etag . '"');
 }
 
 
@@ -291,45 +291,45 @@ if (CP_HEADER_ETAG)
  */
 // Check Etag
 if (CP_HEADER_ETAG && isset($_SERVER['HTTP_IF_NONE_MATCH']) &&
-    stripslashes($_SERVER['HTTP_IF_NONE_MATCH']) == '"' . $etag . '"')
+	stripslashes($_SERVER['HTTP_IF_NONE_MATCH']) == '"' . $etag . '"')
 {
 	header ("HTTP/1.0 304 Not Modified");
-	ob_end_clean();			
+	ob_end_clean();
 	exit;
 }
 else // No Etag specified
-{        
+{
 		// Send headers
 		header('Content-Type: ' . $CP_CONTENT_TYPES[$type]);
 
-        if (CP_HEADER_LAST_MODIFIED)
-        {
-          header('Last-Modified: ' . gmdate("D, d M Y H:i:s", $last_modified)." GMT");
-        }
+		if (CP_HEADER_LAST_MODIFIED)
+		{
+		  header('Last-Modified: ' . gmdate("D, d M Y H:i:s", $last_modified)." GMT");
+		}
 
-        if (CP_HEADER_EXPIRES)
-        {
-            header('Expires: ' . CP_HEADER_EXPIRES_VALUE);
-        }
+		if (CP_HEADER_EXPIRES)
+		{
+			header('Expires: ' . CP_HEADER_EXPIRES_VALUE);
+		}
 
-        if (CP_HEADER_CACHE_CONTROL)
-        {
-            header('Cache-Control: ' . CP_HEADER_CACHE_CONTROL_VALUE);
-        }
+		if (CP_HEADER_CACHE_CONTROL)
+		{
+			header('Cache-Control: ' . CP_HEADER_CACHE_CONTROL_VALUE);
+		}
 
 
-	$cached_file = 
-		realpath(CP_DIR_CACHE) . 
-		DIRECTORY_SEPARATOR .  
+	$cached_file =
+		realpath(CP_DIR_CACHE) .
+		DIRECTORY_SEPARATOR .
 		sprintf('cache-%s%s.%s%s',
 			$etag,
 			(($type == CP_TYPE_CSS &&  CP_CSSMIN) || ($type == CP_TYPE_JS && CP_JSMIN)) ? '-min' : '',
 			$CP_EXTENSIONS[$type],
 			($encoding != CP_ENCODING_NONE) ? '.' . $encoding : ''
-		);	
+		);
 
 	// If we have cached file, return it to the client
-	if (CP_DISK_CACHE && file_exists($cached_file))	 
+	if (CP_DISK_CACHE && file_exists($cached_file))
 	{
 		if ($fp = fopen($cached_file, 'rb'))
 		{
@@ -338,25 +338,25 @@ else // No Etag specified
 			header('Content-Length: ' . filesize($cached_file));
 			fpassthru($fp);
 			fclose($fp);
-			ob_end_flush();					
+			ob_end_flush();
 			exit;
 		}
 		else
 		{
 			give_404('Error reading cached file');
 			exit;
-		}				 
+		}
 	}
 
 	// Perform combining, minimization and compression
 	$content = '';
 	foreach ($elements as $element)
 	{
-		$path = realpath($base_path . DIRECTORY_SEPARATOR . $element);		
+		$path = realpath($base_path . DIRECTORY_SEPARATOR . $element);
 		$temp = file_get_contents($path);
-		
+
 		$content .= "\n\n";
-		
+
 		if (CP_INCLUDE_FILENAME)
 		{
 			$content .= sprintf("/* %s */\n", $element);
@@ -366,14 +366,14 @@ else // No Etag specified
 		{
 			$temp = CssMin::minify($temp);
 		}
-		
+
 		if ($type == CP_TYPE_JS && CP_JSMIN)
 		{
 			$temp = JSMin::minify($temp);
 		}
-				
-	 	$content .= $temp;
-	}				
+
+		$content .= $temp;
+	}
 
 	if ($encoding != CP_ENCODING_NONE)
 	{
@@ -382,11 +382,11 @@ else // No Etag specified
 	}
 
 	header ('Content-Length: ' . strlen($content));
-	echo $content;		
+	echo $content;
 
 	if (CP_DIR_CACHE)
 	{
-		if ($fp = fopen($cached_file, 'wb')) 
+		if ($fp = fopen($cached_file, 'wb'))
 		{
 			fwrite($fp, $content);
 			fclose($fp);
@@ -404,11 +404,11 @@ exit;
 
 /**
   * Utility functions
-  */ 
+  */
 
 /**
  * Renders 404 error to client
- * 
+ *
  * @param string $message Detailed error message
  * @return void
  */
@@ -432,70 +432,70 @@ function give_404($message)
 
 /**
  * Parses HTTP GET params
- * 
+ *
  * @param string $param Parameter name
  * @param bool $trim Convert parameter value to lowercase and trim it
- * @return string|NULL Returns NULL if parameter doesn't exist 
+ * @return string|NULL Returns NULL if parameter doesn't exist
  */
 function get_param($param, $trim = false)
 {
-	return 
-		isset($_GET[$param]) ? 
-			($trim ? strtolower(trim($_GET[$param])) : $_GET[$param]) : 
+	return
+		isset($_GET[$param]) ?
+			($trim ? strtolower(trim($_GET[$param])) : $_GET[$param]) :
 			NULL;
 }
 
 /**
  * Returns client's accepted encoding
  * Code taken from Minify (http://code.google.com/p/minify/)
- * 
+ *
  * @return void bool If client supports gzip
  */
 function getAcceptedEncoding()
 {
 	 // @link http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
-	
+
 	if (! isset($_SERVER['HTTP_ACCEPT_ENCODING'])
-	    || isBuggyIe())
+		|| isBuggyIe())
 	{
-	    return array('', '');
+		return array('', '');
 	}
 	$ae = $_SERVER['HTTP_ACCEPT_ENCODING'];
 	// gzip checks (quick)
 	if (0 === strpos($ae, 'gzip,')             // most browsers
-	    || 0 === strpos($ae, 'deflate, gzip,') // opera
+		|| 0 === strpos($ae, 'deflate, gzip,') // opera
 	) {
-	    return array('gzip', 'gzip');
+		return array('gzip', 'gzip');
 	}
 	// gzip checks (slow)
 	if (preg_match(
-	        '@(?:^|,)\\s*((?:x-)?gzip)\\s*(?:$|,|;\\s*q=(?:0\\.|1))@'
-	        ,$ae
-	        ,$m)) {
-	    return array('gzip', $m[1]);
+			'@(?:^|,)\\s*((?:x-)?gzip)\\s*(?:$|,|;\\s*q=(?:0\\.|1))@'
+			,$ae
+			,$m)) {
+		return array('gzip', $m[1]);
 	}
 }
 
 /**
- * Detect IE with buggy compression support (version earlier than 6 SP2) 
+ * Detect IE with buggy compression support (version earlier than 6 SP2)
  * Code taken from Minify (http://code.google.com/p/minify/)
- * 
+ *
  * @link http://code.google.com/p/minify/
- * @return bool If client uses IE with buggy gzip support 
+ * @return bool If client uses IE with buggy gzip support
  */
 function isBuggyIe()
 {
-    $ua = $_SERVER['HTTP_USER_AGENT'];
-    // quick escape for non-IEs
-    if (0 !== strpos($ua, 'Mozilla/4.0 (compatible; MSIE ')
-        || false !== strpos($ua, 'Opera')) {
-        return false;
-    }
-    // no regex = faaast
-    $version = (float)substr($ua, 30); 
-    return CP_COMPRESSION_FOR_IE6
-        ? ($version < 6 || ($version == 6 && false === strpos($ua, 'SV1')))
-        : ($version < 7);
+	$ua = $_SERVER['HTTP_USER_AGENT'];
+	// quick escape for non-IEs
+	if (0 !== strpos($ua, 'Mozilla/4.0 (compatible; MSIE ')
+		|| false !== strpos($ua, 'Opera')) {
+		return false;
+	}
+	// no regex = faaast
+	$version = (float)substr($ua, 30);
+	return CP_COMPRESSION_FOR_IE6
+		? ($version < 6 || ($version == 6 && false === strpos($ua, 'SV1')))
+		: ($version < 7);
 }
 
 
@@ -565,15 +565,15 @@ class JSMin {
   // -- Public Static Methods --------------------------------------------------
 
   public static function minify($js) {
-    $jsmin = new JSMin($js);
-    return $jsmin->min();
+	$jsmin = new JSMin($js);
+	return $jsmin->min();
   }
 
   // -- Public Instance Methods ------------------------------------------------
 
   public function __construct($input) {
-    $this->input       = str_replace("\r\n", "\n", $input);
-    $this->inputLength = strlen($this->input);
+	$this->input       = str_replace("\r\n", "\n", $input);
+	$this->inputLength = strlen($this->input);
   }
 
   // -- Protected Instance Methods ---------------------------------------------
@@ -581,254 +581,254 @@ class JSMin {
 
 
   /* action -- do something! What you do is determined by the argument:
-          1   Output A. Copy B to A. Get the next B.
-          2   Copy B to A. Get the next B. (Delete A).
-          3   Get the next B. (Delete B).
-     action treats a string as a single character. Wow!
-     action recognizes a regular expression if it is preceded by ( or , or =.
+		  1   Output A. Copy B to A. Get the next B.
+		  2   Copy B to A. Get the next B. (Delete A).
+		  3   Get the next B. (Delete B).
+	 action treats a string as a single character. Wow!
+	 action recognizes a regular expression if it is preceded by ( or , or =.
   */
   protected function action($d) {
-    switch($d) {
-      case 1:
-        $this->output .= $this->a;
+	switch($d) {
+	  case 1:
+		$this->output .= $this->a;
 
-      case 2:
-        $this->a = $this->b;
+	  case 2:
+		$this->a = $this->b;
 
-        if ($this->a === "'" || $this->a === '"') {
-          for (;;) {
-            $this->output .= $this->a;
-            $this->a       = $this->get();
+		if ($this->a === "'" || $this->a === '"') {
+		  for (;;) {
+			$this->output .= $this->a;
+			$this->a       = $this->get();
 
-            if ($this->a === $this->b) {
-              break;
-            }
+			if ($this->a === $this->b) {
+			  break;
+			}
 
-            if (ord($this->a) <= self::ORD_LF) {
-              throw new JSMinException('Unterminated string literal.');
-            }
+			if (ord($this->a) <= self::ORD_LF) {
+			  throw new JSMinException('Unterminated string literal.');
+			}
 
-            if ($this->a === '\\') {
-              $this->output .= $this->a;
-              $this->a       = $this->get();
-            }
-          }
-        }
+			if ($this->a === '\\') {
+			  $this->output .= $this->a;
+			  $this->a       = $this->get();
+			}
+		  }
+		}
 
-      case 3:
-        $this->b = $this->next();
+	  case 3:
+		$this->b = $this->next();
 
-        if ($this->b === '/' && (
-            $this->a === '(' || $this->a === ',' || $this->a === '=' ||
-            $this->a === ':' || $this->a === '[' || $this->a === '!' ||
-            $this->a === '&' || $this->a === '|' || $this->a === '?' ||
-            $this->a === '{' || $this->a === '}' || $this->a === ';' ||
-            $this->a === "\n" )) {
+		if ($this->b === '/' && (
+			$this->a === '(' || $this->a === ',' || $this->a === '=' ||
+			$this->a === ':' || $this->a === '[' || $this->a === '!' ||
+			$this->a === '&' || $this->a === '|' || $this->a === '?' ||
+			$this->a === '{' || $this->a === '}' || $this->a === ';' ||
+			$this->a === "\n" )) {
 
-          $this->output .= $this->a . $this->b;
+		  $this->output .= $this->a . $this->b;
 
-          for (;;) {
-            $this->a = $this->get();
+		  for (;;) {
+			$this->a = $this->get();
 
-            if ($this->a === '[') {
-              /*
-                inside a regex [...] set, which MAY contain a '/' itself. Example: mootools Form.Validator near line 460:
-                  return Form.Validator.getValidator('IsEmpty').test(element) || (/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]\.?){0,63}[a-z0-9!#$%&'*+/=?^_`{|}~-]@(?:(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)*[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\])$/i).test(element.get('value'));
-              */
-              for (;;) {
-                $this->output .= $this->a;
-                $this->a = $this->get();
+			if ($this->a === '[') {
+			  /*
+				inside a regex [...] set, which MAY contain a '/' itself. Example: mootools Form.Validator near line 460:
+				  return Form.Validator.getValidator('IsEmpty').test(element) || (/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]\.?){0,63}[a-z0-9!#$%&'*+/=?^_`{|}~-]@(?:(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)*[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\])$/i).test(element.get('value'));
+			  */
+			  for (;;) {
+				$this->output .= $this->a;
+				$this->a = $this->get();
 
-                if ($this->a === ']') {
-                    break;
-                } elseif ($this->a === '\\') {
-                  $this->output .= $this->a;
-                  $this->a       = $this->get();
-                } elseif (ord($this->a) <= self::ORD_LF) {
-                  throw new JSMinException('Unterminated regular expression set in regex literal.');
-                }
-              }
-            } elseif ($this->a === '/') {
-              break;
-            } elseif ($this->a === '\\') {
-              $this->output .= $this->a;
-              $this->a       = $this->get();
-            } elseif (ord($this->a) <= self::ORD_LF) {
-              throw new JSMinException('Unterminated regular expression literal.');
-            }
+				if ($this->a === ']') {
+					break;
+				} elseif ($this->a === '\\') {
+				  $this->output .= $this->a;
+				  $this->a       = $this->get();
+				} elseif (ord($this->a) <= self::ORD_LF) {
+				  throw new JSMinException('Unterminated regular expression set in regex literal.');
+				}
+			  }
+			} elseif ($this->a === '/') {
+			  break;
+			} elseif ($this->a === '\\') {
+			  $this->output .= $this->a;
+			  $this->a       = $this->get();
+			} elseif (ord($this->a) <= self::ORD_LF) {
+			  throw new JSMinException('Unterminated regular expression literal.');
+			}
 
-            $this->output .= $this->a;
-          }
+			$this->output .= $this->a;
+		  }
 
-          $this->b = $this->next();
-        }
-    }
+		  $this->b = $this->next();
+		}
+	}
   }
 
   protected function get() {
-    $c = $this->lookAhead;
-    $this->lookAhead = null;
+	$c = $this->lookAhead;
+	$this->lookAhead = null;
 
-    if ($c === null) {
-      if ($this->inputIndex < $this->inputLength) {
-        $c = substr($this->input, $this->inputIndex, 1);
-        $this->inputIndex += 1;
-      } else {
-        $c = null;
-      }
-    }
+	if ($c === null) {
+	  if ($this->inputIndex < $this->inputLength) {
+		$c = substr($this->input, $this->inputIndex, 1);
+		$this->inputIndex += 1;
+	  } else {
+		$c = null;
+	  }
+	}
 
-    if ($c === "\r") {
-      return "\n";
-    }
+	if ($c === "\r") {
+	  return "\n";
+	}
 
-    if ($c === null || $c === "\n" || ord($c) >= self::ORD_SPACE) {
-      return $c;
-    }
+	if ($c === null || $c === "\n" || ord($c) >= self::ORD_SPACE) {
+	  return $c;
+	}
 
-    return ' ';
+	return ' ';
   }
 
   /* isAlphanum -- return true if the character is a letter, digit, underscore,
-        dollar sign, or non-ASCII character.
+		dollar sign, or non-ASCII character.
   */
   protected function isAlphaNum($c) {
-    return ord($c) > 126 || $c === '\\' || preg_match('/^[\w\$]$/', $c) === 1;
+	return ord($c) > 126 || $c === '\\' || preg_match('/^[\w\$]$/', $c) === 1;
   }
 
   protected function min() {
-    $this->a = "\n";
-    $this->action(3);
+	$this->a = "\n";
+	$this->action(3);
 
-    while ($this->a !== null) {
-      switch ($this->a) {
-        case ' ':
-          if ($this->isAlphaNum($this->b)) {
-            $this->action(1);
-          } else {
-            $this->action(2);
-          }
-          break;
+	while ($this->a !== null) {
+	  switch ($this->a) {
+		case ' ':
+		  if ($this->isAlphaNum($this->b)) {
+			$this->action(1);
+		  } else {
+			$this->action(2);
+		  }
+		  break;
 
-        case "\n":
-          switch ($this->b) {
-            case '{':
-            case '[':
-            case '(':
-            case '+':
-            case '-':
-              $this->action(1);
-              break;
+		case "\n":
+		  switch ($this->b) {
+			case '{':
+			case '[':
+			case '(':
+			case '+':
+			case '-':
+			  $this->action(1);
+			  break;
 
-            case ' ':
-              $this->action(3);
-              break;
+			case ' ':
+			  $this->action(3);
+			  break;
 
-            default:
-              if ($this->isAlphaNum($this->b)) {
-                $this->action(1);
-              }
-              else {
-                $this->action(2);
-              }
-          }
-          break;
+			default:
+			  if ($this->isAlphaNum($this->b)) {
+				$this->action(1);
+			  }
+			  else {
+				$this->action(2);
+			  }
+		  }
+		  break;
 
-        default:
-          switch ($this->b) {
-            case ' ':
-              if ($this->isAlphaNum($this->a)) {
-                $this->action(1);
-                break;
-              }
+		default:
+		  switch ($this->b) {
+			case ' ':
+			  if ($this->isAlphaNum($this->a)) {
+				$this->action(1);
+				break;
+			  }
 
-              $this->action(3);
-              break;
+			  $this->action(3);
+			  break;
 
-            case "\n":
-              switch ($this->a) {
-                case '}':
-                case ']':
-                case ')':
-                case '+':
-                case '-':
-                case '"':
-                case "'":
-                  $this->action(1);
-                  break;
+			case "\n":
+			  switch ($this->a) {
+				case '}':
+				case ']':
+				case ')':
+				case '+':
+				case '-':
+				case '"':
+				case "'":
+				  $this->action(1);
+				  break;
 
-                default:
-                  if ($this->isAlphaNum($this->a)) {
-                    $this->action(1);
-                  }
-                  else {
-                    $this->action(3);
-                  }
-              }
-              break;
+				default:
+				  if ($this->isAlphaNum($this->a)) {
+					$this->action(1);
+				  }
+				  else {
+					$this->action(3);
+				  }
+			  }
+			  break;
 
-            default:
-              $this->action(1);
-              break;
-          }
-      }
-    }
+			default:
+			  $this->action(1);
+			  break;
+		  }
+	  }
+	}
 
-    return $this->output;
+	return $this->output;
   }
 
   /* next -- get the next character, excluding comments. peek() is used to see
-             if a '/' is followed by a '/' or '*'.
+			 if a '/' is followed by a '/' or '*'.
   */
   protected function next() {
-    $c = $this->get();
+	$c = $this->get();
 
-    if ($c === '/') {
-      switch($this->peek()) {
-        case '/':
-          for (;;) {
-            $c = $this->get();
+	if ($c === '/') {
+	  switch($this->peek()) {
+		case '/':
+		  for (;;) {
+			$c = $this->get();
 
-            if (ord($c) <= self::ORD_LF) {
-              return $c;
-            }
-          }
+			if (ord($c) <= self::ORD_LF) {
+			  return $c;
+			}
+		  }
 
-        case '*':
-          $this->get();
+		case '*':
+		  $this->get();
 
-          for (;;) {
-            switch($this->get()) {
-              case '*':
-                if ($this->peek() === '/') {
-                  $this->get();
-                  return ' ';
-                }
-                break;
+		  for (;;) {
+			switch($this->get()) {
+			  case '*':
+				if ($this->peek() === '/') {
+				  $this->get();
+				  return ' ';
+				}
+				break;
 
-              case null:
-                throw new JSMinException('Unterminated comment.');
-            }
-          }
+			  case null:
+				throw new JSMinException('Unterminated comment.');
+			}
+		  }
 
-        default:
-          return $c;
-      }
-    }
+		default:
+		  return $c;
+	  }
+	}
 
-    return $c;
+	return $c;
   }
 
   protected function peek() {
-    $this->lookAhead = $this->get();
-    return $this->lookAhead;
+	$this->lookAhead = $this->get();
+	return $this->lookAhead;
   }
 }
 
 // -- Exceptions ---------------------------------------------------------------
 class JSMinException extends Exception {}
 
-	
+
 /**
  * CSSMin
  * http://code.google.com/p/cssmin/
@@ -1207,10 +1207,10 @@ class CssMin
 	 * @var array
 	 */
 	private static $fontWeightTransformations = array
- 		(
- 		"normal"						=> "400",
- 		"bold"							=> "700"
- 		);
+		(
+		"normal"						=> "400",
+		"bold"							=> "700"
+		);
 	/**
 	 * Css property transformations table. Used to convert CSS3 and proprietary properties to the browser-specific counterparts.
 	 *
