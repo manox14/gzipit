@@ -3,6 +3,7 @@
 		'css-default' => array(
 			'type' => 'css',
 			'files' => array(
+				'other.css',
 				'jquery.ui.core.css',
 				'jquery.ui.resizable.css',
 				'jquery.ui.selectable.css',
