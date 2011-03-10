@@ -52,7 +52,7 @@
  */
 
 // Use gzip compression
-define('CP_COMPRESSION', false);
+define('CP_COMPRESSION', true);
 
 // IE6 is buggy with gzip, you can turn gzip for this browser completely using this parameter
 define('CP_COMPRESSION_FOR_IE6', true);
