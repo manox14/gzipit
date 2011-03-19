@@ -149,11 +149,11 @@ With nice and clean URLs:
 }}}
 
 =Changelog=
-	* 2011-03-__ -- first stable version, PHP 5.3 support
-	* 2010-10-03 -- initial release v1.0-beta1
+	* 2011-03-20 — v1.0, first stable version, PHP 5.3 support
+	* 2010-10-03 — v1.0-beta1, initial release 
 
 =!ToDo=
-	* Add support for eAccelerator\APC\memcached to store processed files in their cache
+	* Support for eAccelerator\APC\memcached to store processed files in their cache
 	* Better prefix and names for configuration parameters (any ideas?)
 	* Check if phar is really an option
 	
