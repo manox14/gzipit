@@ -1,5 +1,5 @@
 <?php
-	$CP_ASSETS = array(
+	$GZIPIT_ASSETS = array(
 		'css-default' => array(
 			'type' => 'css',
 			'files' => array(

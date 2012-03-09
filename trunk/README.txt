@@ -25,20 +25,20 @@
 	
 	{{{
 // Directory where output files will be cached (can be placed outside of document root)
-define('CP_DIR_CACHE', dirname(__FILE__) . '/tmp');
+define('GZIPIT_DIR_CACHE', dirname(__FILE__) . '/tmp');
 
 // Directory where original CSS files are stored (sub directories are accessible too)
-define('CP_DIR_CSS', dirname(__FILE__) . '/css');			
+define('GZIPIT_DIR_CSS', dirname(__FILE__) . '/css');			
 
 // Directory where original CSS files are stored (sub directories are accessible too)
-define('CP_DIR_JS', dirname(__FILE__) . '/js');				
+define('GZIPIT_DIR_JS', dirname(__FILE__) . '/js');				
 }}}
-	* Make folder you specified in `CP_DIR_CACHE` writable from PHP.
+	* Make folder you specified in `GZIPIT_DIR_CACHE` writable from PHP.
 
 =Test the installation=
 !GzipIt accepts three HTTP GET parameters: `type`, `files` (used only together) and `assets`. Please check next section for instructions how to use assets, the remaining two are simple:
 	* `type` can have one of two possible values `css` (for CSS files) or `javascript` (for !JavaScript)
-	* `files` should be comma-delimited list of files from the folders you specified in `CP_DIR_CSS` or `CP_DIR_JS` parameters
+	* `files` should be comma-delimited list of files from the folders you specified in `GZIPIT_DIR_CSS` or `GZIPIT_DIR_JS` parameters
 
 To test that !GzipIt works in your environment you can try to access the URL (ajust it for you domain):
 
@@ -72,13 +72,13 @@ Asset is a 'preset' of two parameters (`type` and `files`) and can be specified 
 If you specify this parameter (default is empty string):
 	
 {{{
-define('CP_ASSETS_FILE', 'assets.php');
+define('GZIPIT_ASSETS_FILE', 'assets.php');
 }}}
-the specified file will be included and variable called `$CP_ASSETS` will be used, otherwise you can specify this variable in `gzipit.php`.
+the specified file will be included and variable called `$GZIPIT_ASSETS` will be used, otherwise you can specify this variable in `gzipit.php`.
 For both cases syntax is the same:
 
 {{{
-$CP_ASSETS = array(
+$GZIPIT_ASSETS = array(
 	'css-default' => array(
 		'type' => 'css',
 		'files' => array(
@@ -170,15 +170,14 @@ server {
 }}}
 
 =Changelog=
-	* 2012-03-09 — v1.1, bugfix release
+	* 2012-03-09 — v1.1, bugfixes, constants are now prefixed with `GZIPIT_` instead of `CP_`
 	* 2011-03-20 — v1.0, first stable version, PHP 5.3 support
 	* 2010-10-03 — v1.0-beta1, initial release 
 
-=ToDo=
+=!ToDo=
 	* Update of the bundled libraries
 	* Support for eAccelerator\APC\memcached to store processed files in their cache
-	* Better prefix and names for configuration parameters (any ideas?)
-	* Check if phar is really an option
+	* Check if [http://www.php.net/manual/en/intro.phar.php phar] is really an option
 	
 =Limitations=	
 	* For even more efficient serving CSS and !JavaScript you should consider performing combining, minimizing and gzipping beforehand, so files will be served directly by web server without any need for PHP. If you have really high traffic site you should already know and use this :).

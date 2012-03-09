@@ -52,76 +52,76 @@
  */
 
 // Use gzip compression
-if (!defined('CP_COMPRESSION'))
-	define('CP_COMPRESSION', true);
+if (!defined('GZIPIT_COMPRESSION'))
+	define('GZIPIT_COMPRESSION', true);
 
 // IE6 is buggy with gzip, you can turn gzip for this browser completely using this parameter
-if (!defined('CP_COMPRESSION_FOR_IE6'))
-	define('CP_COMPRESSION_FOR_IE6', true);
+if (!defined('GZIPIT_COMPRESSION_FOR_IE6'))
+	define('GZIPIT_COMPRESSION_FOR_IE6', true);
 
 // Compresion level (from 0 to 9)
-if (!defined('CP_GZIP_LEVEL'))
-	define('CP_GZIP_LEVEL', 9);
+if (!defined('GZIPIT_GZIP_LEVEL'))
+	define('GZIPIT_GZIP_LEVEL', 9);
 
 // Cache files on disk (with minimizing enabled this should be enabled)
-if (!defined('CP_DISK_CACHE'))
-	define('CP_DISK_CACHE',	true);
+if (!defined('GZIPIT_DISK_CACHE'))
+	define('GZIPIT_DISK_CACHE',	true);
 
 // Minimize CSS files
-if (!defined('CP_CSSMIN'))
-	define('CP_CSSMIN', true);
+if (!defined('GZIPIT_CSSMIN'))
+	define('GZIPIT_CSSMIN', true);
 
 // Minimize JavaScript files
-if (!defined('CP_JSMIN'))
-	define('CP_JSMIN', true);
+if (!defined('GZIPIT_JSMIN'))
+	define('GZIPIT_JSMIN', true);
 
 // Include filename into combined output (useful for debug)
-if (!defined('CP_INCLUDE_FILENAME'))
-	define('CP_INCLUDE_FILENAME', true);
+if (!defined('GZIPIT_INCLUDE_FILENAME'))
+	define('GZIPIT_INCLUDE_FILENAME', true);
 
 // Directory where output files will be cached (can be placed outside of document root)
-if (!defined('CP_DIR_CACHE'))
-	define('CP_DIR_CACHE', dirname(__FILE__) . '/tmp');
+if (!defined('GZIPIT_DIR_CACHE'))
+	define('GZIPIT_DIR_CACHE', dirname(__FILE__) . '/tmp');
 
 // Directory where original CSS files are stored (sub directories are accessible too)
-if (!defined('CP_DIR_CSS'))
-	define('CP_DIR_CSS', dirname(__FILE__) . '/css');
+if (!defined('GZIPIT_DIR_CSS'))
+	define('GZIPIT_DIR_CSS', dirname(__FILE__) . '/css');
 
 // Directory where original CSS files are stored (sub directories are accessible too)
-if (!defined('CP_DIR_JS'))
-	define('CP_DIR_JS', dirname(__FILE__) . '/js');
+if (!defined('GZIPIT_DIR_JS'))
+	define('GZIPIT_DIR_JS', dirname(__FILE__) . '/js');
 
 // Send 'ETag' header (calculated automatically)
-if (!defined('CP_HEADER_ETAG'))
-	define('CP_HEADER_ETAG', true);
+if (!defined('GZIPIT_HEADER_ETAG'))
+	define('GZIPIT_HEADER_ETAG', true);
 
 // Send 'Last-Modified' header (calculated automatically)
-if (!defined('CP_HEADER_LAST_MODIFIED'))
-	define('CP_HEADER_LAST_MODIFIED', true);
+if (!defined('GZIPIT_HEADER_LAST_MODIFIED'))
+	define('GZIPIT_HEADER_LAST_MODIFIED', true);
 
 // Send 'Cache-Control' header
-if (!defined('CP_HEADER_CACHE_CONTROL'))
-	define('CP_HEADER_CACHE_CONTROL', true);
+if (!defined('GZIPIT_HEADER_CACHE_CONTROL'))
+	define('GZIPIT_HEADER_CACHE_CONTROL', true);
 
 // Value for the 'Cache-Control' header
-if (!defined('CP_HEADER_CACHE_CONTROL_VALUE'))
-	define('CP_HEADER_CACHE_CONTROL_VALUE', 'max-age=315360000');
+if (!defined('GZIPIT_HEADER_CACHE_CONTROL_VALUE'))
+	define('GZIPIT_HEADER_CACHE_CONTROL_VALUE', 'max-age=315360000');
 
 // Send 'Expires' header
-if (!defined('CP_HEADER_EXPIRES'))
-	define('CP_HEADER_EXPIRES', true);
+if (!defined('GZIPIT_HEADER_EXPIRES'))
+	define('GZIPIT_HEADER_EXPIRES', true);
 
 // Value for the 'Expires' header
-if (!defined('CP_HEADER_EXPIRES_VALUE'))
-	define('CP_HEADER_EXPIRES_VALUE', 'Thu, 31 Dec 2037 23:55:55 GMT');
+if (!defined('GZIPIT_HEADER_EXPIRES_VALUE'))
+	define('GZIPIT_HEADER_EXPIRES_VALUE', 'Thu, 31 Dec 2037 23:55:55 GMT');
 
 // NOTE: Specify name of the asset file OR assets array, but not the two at the same time
-if (!defined('CP_ASSETS_FILE'))
-	define('CP_ASSETS_FILE', 'assets.php');
+if (!defined('GZIPIT_ASSETS_FILE'))
+	define('GZIPIT_ASSETS_FILE', 'assets.php');
 /*
-	Example of $CP_ASSETS
+	Example of $GZIPIT_ASSETS
 
-	$CP_ASSETS = array(
+	$GZIPIT_ASSETS = array(
 		'css-default' => array(
 			'type' => 'css',
 			'files' => array(
@@ -141,7 +141,7 @@ if (!defined('CP_ASSETS_FILE'))
 	);
 
 */
-$CP_ASSETS = array(
+$GZIPIT_ASSETS = array(
 );
 
 
@@ -151,37 +151,37 @@ $CP_ASSETS = array(
  * *****************************************************************************************************************
  */
 // Other constants and parameters
-define('CP_FILELIST_DELIMITER', ',');
+define('GZIPIT_FILELIST_DELIMITER', ',');
 
-define('CP_ENCODING_NONE', 'none');
-define('CP_ENCODING_GZIP', 'gzip');
-$CP_ENCODING_TYPES = array(
-	CP_ENCODING_NONE,
-	CP_ENCODING_GZIP
-);
-
-define('CP_TYPE_CSS', 'css');
-define('CP_TYPE_JS', 'javascript');
-$CP_TYPES = array(
-	CP_TYPE_CSS,
-	CP_TYPE_JS
-);
-$CP_CONTENT_TYPES = array(
-	CP_TYPE_CSS => 'text/css',
-	CP_TYPE_JS => 'text/javascript'
-);
-$CP_EXTENSIONS = array(
-	CP_TYPE_CSS	=> 'css',
-	CP_TYPE_JS	=> 'js'
-);
-$CP_PATHES = array(
-	CP_TYPE_CSS	=> CP_DIR_CSS,
-	CP_TYPE_JS	=> CP_DIR_JS
+define('GZIPIT_ENCODING_NONE', 'none');
+define('GZIPIT_ENCODING_GZIP', 'gzip');
+$GZIPIT_ENCODING_TYPES = array(
+	GZIPIT_ENCODING_NONE,
+	GZIPIT_ENCODING_GZIP
 );
 
-if (CP_ASSETS_FILE != NULL && CP_ASSETS_FILE != '' && CP_ASSETS_FILE !== false)
+define('GZIPIT_TYPE_CSS', 'css');
+define('GZIPIT_TYPE_JS', 'javascript');
+$GZIPIT_TYPES = array(
+	GZIPIT_TYPE_CSS,
+	GZIPIT_TYPE_JS
+);
+$GZIPIT_CONTENT_TYPES = array(
+	GZIPIT_TYPE_CSS => 'text/css',
+	GZIPIT_TYPE_JS => 'text/javascript'
+);
+$GZIPIT_EXTENSIONS = array(
+	GZIPIT_TYPE_CSS	=> 'css',
+	GZIPIT_TYPE_JS	=> 'js'
+);
+$GZIPIT_PATHES = array(
+	GZIPIT_TYPE_CSS	=> GZIPIT_DIR_CSS,
+	GZIPIT_TYPE_JS	=> GZIPIT_DIR_JS
+);
+
+if (GZIPIT_ASSETS_FILE != NULL && GZIPIT_ASSETS_FILE != '' && GZIPIT_ASSETS_FILE !== false)
 {
-	require_once(CP_ASSETS_FILE);
+	require_once(GZIPIT_ASSETS_FILE);
 }
 
 ob_start();
@@ -196,10 +196,10 @@ $asset = get_param('asset');
 // Check if asset name specified
 if ($asset != NULL)
 {
-	if (isset($CP_ASSETS[$asset]))
+	if (isset($GZIPIT_ASSETS[$asset]))
 	{
-		$files = $CP_ASSETS[$asset]['files'];
-		$type = $CP_ASSETS[$asset]['type'];
+		$files = $GZIPIT_ASSETS[$asset]['files'];
+		$type = $GZIPIT_ASSETS[$asset]['type'];
 	}
 	else
 	{
@@ -211,15 +211,15 @@ if ($asset != NULL)
 // Get files list and type
 if ($files != NULL && $type != NULL)
 {
-	if (in_array($type, $CP_TYPES))
+	if (in_array($type, $GZIPIT_TYPES))
 	{
 		if ($asset == NULL)
 		{
-			$elements = explode(CP_FILELIST_DELIMITER, $files);
+			$elements = explode(GZIPIT_FILELIST_DELIMITER, $files);
 		}
 		else
 		{
-			$elements = $CP_ASSETS[$asset]['files'];
+			$elements = $GZIPIT_ASSETS[$asset]['files'];
 		}
 	}
 	else
@@ -246,24 +246,24 @@ else
  * Determine supported compression
  *
  */
-if (CP_COMPRESSION)
+if (GZIPIT_COMPRESSION)
 {
 	$temp = getAcceptedEncoding();
 
-	if ($temp[0] == CP_ENCODING_GZIP)
+	if ($temp[0] == GZIPIT_ENCODING_GZIP)
 	{
-		$encoding = CP_ENCODING_GZIP;
+		$encoding = GZIPIT_ENCODING_GZIP;
 		$encoding_header = $temp[1];
 	}
 	else
 	{
-		$encoding = CP_ENCODING_NONE;
+		$encoding = GZIPIT_ENCODING_NONE;
 		$encoding_header = NULL;
 	}
 }
 else
 {
-	$encoding = CP_ENCODING_NONE;
+	$encoding = GZIPIT_ENCODING_NONE;
 	$encoding_header = NULL;
 }
 
@@ -273,8 +273,8 @@ else
  */
 $last_modified = 0;
 
-$base_path = realpath($CP_PATHES[$type]);
-$ext = $CP_EXTENSIONS[$type];
+$base_path = realpath($GZIPIT_PATHES[$type]);
+$ext = $GZIPIT_EXTENSIONS[$type];
 foreach ($elements as $element)
 {
 	$path = realpath($base_path . DIRECTORY_SEPARATOR . $element);
@@ -296,8 +296,8 @@ foreach ($elements as $element)
 /**
  * Construct and send ETag if enabled
  */
-$etag = sprintf('%s-%s', $last_modified, md5(implode(CP_FILELIST_DELIMITER, $elements) . $type . (string)(CP_CSSMIN || CP_JSMIN) . $encoding_header));
-if (CP_HEADER_ETAG)
+$etag = sprintf('%s-%s', $last_modified, md5(implode(GZIPIT_FILELIST_DELIMITER, $elements) . $type . (string)(GZIPIT_CSSMIN || GZIPIT_JSMIN) . $encoding_header));
+if (GZIPIT_HEADER_ETAG)
 {
 	header ('Etag: "' . $etag . '"');
 }
@@ -307,7 +307,7 @@ if (CP_HEADER_ETAG)
  * Let's do it!
  */
 // Check Etag
-if (CP_HEADER_ETAG && isset($_SERVER['HTTP_IF_NONE_MATCH']) &&
+if (GZIPIT_HEADER_ETAG && isset($_SERVER['HTTP_IF_NONE_MATCH']) &&
 	stripslashes($_SERVER['HTTP_IF_NONE_MATCH']) == '"' . $etag . '"')
 {
 	header ("HTTP/1.0 304 Not Modified");
@@ -317,36 +317,36 @@ if (CP_HEADER_ETAG && isset($_SERVER['HTTP_IF_NONE_MATCH']) &&
 else // No Etag specified
 {
 		// Send headers
-		header('Content-Type: ' . $CP_CONTENT_TYPES[$type]);
+		header('Content-Type: ' . $GZIPIT_CONTENT_TYPES[$type]);
 
-		if (CP_HEADER_LAST_MODIFIED)
+		if (GZIPIT_HEADER_LAST_MODIFIED)
 		{
 		  header('Last-Modified: ' . gmdate("D, d M Y H:i:s", $last_modified)." GMT");
 		}
 
-		if (CP_HEADER_EXPIRES)
+		if (GZIPIT_HEADER_EXPIRES)
 		{
-			header('Expires: ' . CP_HEADER_EXPIRES_VALUE);
+			header('Expires: ' . GZIPIT_HEADER_EXPIRES_VALUE);
 		}
 
-		if (CP_HEADER_CACHE_CONTROL)
+		if (GZIPIT_HEADER_CACHE_CONTROL)
 		{
-			header('Cache-Control: ' . CP_HEADER_CACHE_CONTROL_VALUE);
+			header('Cache-Control: ' . GZIPIT_HEADER_CACHE_CONTROL_VALUE);
 		}
 
 
 	$cached_file =
-		realpath(CP_DIR_CACHE) .
+		realpath(GZIPIT_DIR_CACHE) .
 		DIRECTORY_SEPARATOR .
 		sprintf('cache-%s%s.%s%s',
 			$etag,
-			(($type == CP_TYPE_CSS &&  CP_CSSMIN) || ($type == CP_TYPE_JS && CP_JSMIN)) ? '-min' : '',
-			$CP_EXTENSIONS[$type],
-			($encoding != CP_ENCODING_NONE) ? '.' . $encoding : ''
+			(($type == GZIPIT_TYPE_CSS &&  GZIPIT_CSSMIN) || ($type == GZIPIT_TYPE_JS && GZIPIT_JSMIN)) ? '-min' : '',
+			$GZIPIT_EXTENSIONS[$type],
+			($encoding != GZIPIT_ENCODING_NONE) ? '.' . $encoding : ''
 		);
 
 	// If we have cached file, return it to the client
-	if (CP_DISK_CACHE && file_exists($cached_file))
+	if (GZIPIT_DISK_CACHE && file_exists($cached_file))
 	{
 		if ($fp = fopen($cached_file, 'rb'))
 		{
@@ -374,17 +374,17 @@ else // No Etag specified
 
 		$content .= "\n\n";
 
-		if (CP_INCLUDE_FILENAME)
+		if (GZIPIT_INCLUDE_FILENAME)
 		{
 			$content .= sprintf("/* %s */\n", $element);
 		}
 
-		if ($type == CP_TYPE_CSS && CP_CSSMIN)
+		if ($type == GZIPIT_TYPE_CSS && GZIPIT_CSSMIN)
 		{
 			$temp = CssMin::minify($temp);
 		}
 
-		if ($type == CP_TYPE_JS && CP_JSMIN)
+		if ($type == GZIPIT_TYPE_JS && GZIPIT_JSMIN)
 		{
 			$temp = JSMin::minify($temp);
 		}
@@ -392,16 +392,16 @@ else // No Etag specified
 		$content .= $temp;
 	}
 
-	if ($encoding != CP_ENCODING_NONE)
+	if ($encoding != GZIPIT_ENCODING_NONE)
 	{
-		$content = gzencode($content, CP_GZIP_LEVEL, FORCE_GZIP);
+		$content = gzencode($content, GZIPIT_GZIP_LEVEL, FORCE_GZIP);
 		header ('Content-Encoding: ' . $encoding_header);
 	}
 
 	header ('Content-Length: ' . strlen($content));
 	echo $content;
 
-	if (CP_DISK_CACHE)
+	if (GZIPIT_DISK_CACHE)
 	{
 		if ($fp = fopen($cached_file, 'wb'))
 		{
