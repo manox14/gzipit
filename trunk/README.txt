@@ -122,7 +122,7 @@ But there is one disadvantage left:
 	
 So, let's move to the even better option.	
 
-=Enabling `mod_rewrite` for assets (recommended mode)=
+=Enabling Apache's `mod_rewrite` for assets=
 
 Place the following into you `.htaccess`:
 
@@ -148,11 +148,34 @@ With nice and clean URLs:
 <script type="text/javascript" src="/asset-js-default.v1.js"></script>
 }}}
 
+=nginx configuration=
+
+When nginx is the only web server (no Apache backend), rewrites can be configured like this:
+
+{{{
+server {
+        server_name  example.com www.example.com;
+        listen   80;
+        
+        location / {
+               root   /www/example.com;
+               index  index.php index.html index.htm;
+               if (!-e $request_filename) {
+			rewrite ^\/asset-(.*?)\.v(.*?)\.(css|js)$ /gzipit.php?asset=$1 last;
+               }
+        }        
+
+	... // Other sections
+}
+}}}
+
 =Changelog=
+	* 2012-03-09 — v1.1, bugfix release
 	* 2011-03-20 — v1.0, first stable version, PHP 5.3 support
 	* 2010-10-03 — v1.0-beta1, initial release 
 
-=!ToDo=
+=ToDo=
+	* Update of the bundled libraries
 	* Support for eAccelerator\APC\memcached to store processed files in their cache
 	* Better prefix and names for configuration parameters (any ideas?)
 	* Check if phar is really an option

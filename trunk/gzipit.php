@@ -52,55 +52,72 @@
  */
 
 // Use gzip compression
-define('CP_COMPRESSION', true);
+if (!defined('CP_COMPRESSION'))
+	define('CP_COMPRESSION', true);
 
 // IE6 is buggy with gzip, you can turn gzip for this browser completely using this parameter
-define('CP_COMPRESSION_FOR_IE6', true);
+if (!defined('CP_COMPRESSION_FOR_IE6'))
+	define('CP_COMPRESSION_FOR_IE6', true);
 
 // Compresion level (from 0 to 9)
-define('CP_GZIP_LEVEL', 9);
+if (!defined('CP_GZIP_LEVEL'))
+	define('CP_GZIP_LEVEL', 9);
 
 // Cache files on disk (with minimizing enabled this should be enabled)
-define('CP_DISK_CACHE',	true);
+if (!defined('CP_DISK_CACHE'))
+	define('CP_DISK_CACHE',	true);
 
 // Minimize CSS files
-define('CP_CSSMIN', true);
+if (!defined('CP_CSSMIN'))
+	define('CP_CSSMIN', true);
 
 // Minimize JavaScript files
-define('CP_JSMIN', true);
+if (!defined('CP_JSMIN'))
+	define('CP_JSMIN', true);
 
 // Include filename into combined output (useful for debug)
-define('CP_INCLUDE_FILENAME', true);
+if (!defined('CP_INCLUDE_FILENAME'))
+	define('CP_INCLUDE_FILENAME', true);
 
 // Directory where output files will be cached (can be placed outside of document root)
-define('CP_DIR_CACHE', dirname(__FILE__) . '/tmp');
+if (!defined('CP_DIR_CACHE'))
+	define('CP_DIR_CACHE', dirname(__FILE__) . '/tmp');
 
 // Directory where original CSS files are stored (sub directories are accessible too)
-define('CP_DIR_CSS', dirname(__FILE__) . '/css');
+if (!defined('CP_DIR_CSS'))
+	define('CP_DIR_CSS', dirname(__FILE__) . '/css');
 
 // Directory where original CSS files are stored (sub directories are accessible too)
-define('CP_DIR_JS', dirname(__FILE__) . '/js');
+if (!defined('CP_DIR_JS'))
+	define('CP_DIR_JS', dirname(__FILE__) . '/js');
 
 // Send 'ETag' header (calculated automatically)
-define('CP_HEADER_ETAG', true);
+if (!defined('CP_HEADER_ETAG'))
+	define('CP_HEADER_ETAG', true);
 
 // Send 'Last-Modified' header (calculated automatically)
-define('CP_HEADER_LAST_MODIFIED', true);
+if (!defined('CP_HEADER_LAST_MODIFIED'))
+	define('CP_HEADER_LAST_MODIFIED', true);
 
 // Send 'Cache-Control' header
-define('CP_HEADER_CACHE_CONTROL', true);
+if (!defined('CP_HEADER_CACHE_CONTROL'))
+	define('CP_HEADER_CACHE_CONTROL', true);
 
 // Value for the 'Cache-Control' header
-define('CP_HEADER_CACHE_CONTROL_VALUE', 'max-age=315360000');
+if (!defined('CP_HEADER_CACHE_CONTROL_VALUE'))
+	define('CP_HEADER_CACHE_CONTROL_VALUE', 'max-age=315360000');
 
 // Send 'Expires' header
-define('CP_HEADER_EXPIRES', true);
+if (!defined('CP_HEADER_EXPIRES'))
+	define('CP_HEADER_EXPIRES', true);
 
 // Value for the 'Expires' header
-define('CP_HEADER_EXPIRES_VALUE', 'Thu, 31 Dec 2037 23:55:55 GMT');
+if (!defined('CP_HEADER_EXPIRES_VALUE'))
+	define('CP_HEADER_EXPIRES_VALUE', 'Thu, 31 Dec 2037 23:55:55 GMT');
 
 // NOTE: Specify name of the asset file OR assets array, but not the two at the same time
-define('CP_ASSETS_FILE', 'assets.php');
+if (!defined('CP_ASSETS_FILE'))
+	define('CP_ASSETS_FILE', 'assets.php');
 /*
 	Example of $CP_ASSETS
 
