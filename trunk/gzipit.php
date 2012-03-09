@@ -2,7 +2,7 @@
 
 /**
  *
- * GzipIt 1.0
+ * GzipIt 1.1
  *
  * Single file solution for CSS and JavaScript combination,
  * minimization, gzipping and caching.
@@ -16,7 +16,7 @@
  * See copyright and licences below for bundled components.
  *
  * --
- * Copyright (c) 2010, 2011 Artem Volk (www.artvolk.sumy.ua)
+ * Copyright (c) 2010-2012 Artem Volk (www.artvolk.sumy.ua)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -384,7 +384,7 @@ else // No Etag specified
 	header ('Content-Length: ' . strlen($content));
 	echo $content;
 
-	if (CP_DIR_CACHE)
+	if (CP_DISK_CACHE)
 	{
 		if ($fp = fopen($cached_file, 'wb'))
 		{
