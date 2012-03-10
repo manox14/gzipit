@@ -65,7 +65,7 @@ if (!defined('GZIPIT_GZIP_LEVEL'))
 
 // Cache files on disk (with minimizing enabled this should be enabled)
 if (!defined('GZIPIT_DISK_CACHE'))
-	define('GZIPIT_DISK_CACHE',	true);
+	define('GZIPIT_DISK_CACHE', true);
 
 // Minimize CSS files
 if (!defined('GZIPIT_CSSMIN'))
