@@ -510,7 +510,7 @@ function isBuggyIe()
 	}
 	// no regex = faaast
 	$version = (float)substr($ua, 30);
-	return CP_COMPRESSION_FOR_IE6
+	return GZIPIT_COMPRESSION_FOR_IE6
 		? ($version < 6 || ($version == 6 && false === strpos($ua, 'SV1')))
 		: ($version < 7);
 }
