@@ -170,6 +170,7 @@ server {
 }}}
 
 =Changelog=
+	* 2012-03-30 — v1.2, bugfix for IE6,7,8
 	* 2012-03-09 — v1.1, bugfixes, constants are now prefixed with `GZIPIT_` instead of `CP_`
 	* 2011-03-20 — v1.0, first stable version, PHP 5.3 support
 	* 2010-10-03 — v1.0-beta1, initial release 
