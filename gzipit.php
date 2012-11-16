@@ -209,11 +209,11 @@ if ($asset != NULL)
 }
 
 // Get files list and type
-if ($files != NULL && $type != NULL)
+if ($files !== NULL && $type !== NULL)
 {
 	if (in_array($type, $GZIPIT_TYPES))
 	{
-		if ($asset == NULL)
+		if ($asset === NULL)
 		{
 			$elements = explode(GZIPIT_FILELIST_DELIMITER, $files);
 		}
